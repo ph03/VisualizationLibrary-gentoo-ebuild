@@ -1,0 +1,10 @@
+diff -rupN orig/CMakeLists.txt new/CMakeLists.txt
+--- orig/CMakeLists.txt	2011-07-15 00:50:40.000000000 +0200
++++ new/CMakeLists.txt	2011-07-20 21:52:45.459954084 +0200
+@@ -150,5 +150,4 @@ add_subdirectory("src")
+ # Install Rules
+ ################################################################################
+ 
+-install(FILES "LICENSE.TXT" "README.TXT" DESTINATION ".")
+-install(FILES "cmake/FindVL.cmake" DESTINATION "cmake")
++install(FILES "cmake/FindVL.cmake" DESTINATION "share/cmake/Modules")
