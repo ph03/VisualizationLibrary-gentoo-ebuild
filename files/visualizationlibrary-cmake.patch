@@ -8,3 +8,15 @@ diff -rupN orig/CMakeLists.txt new/CMakeLists.txt
 -install(FILES "LICENSE.TXT" "README.TXT" DESTINATION ".")
 -install(FILES "cmake/FindVL.cmake" DESTINATION "cmake")
 +install(FILES "cmake/FindVL.cmake" DESTINATION "share/cmake/Modules")
+diff -rupN orig/data/CMakeLists.txt new/data/CMakeLists.txt
+--- orig/data/CMakeLists.txt	2011-07-14 23:00:12.000000000 +0200
++++ new/data/CMakeLists.txt	2011-07-20 22:50:24.315712435 +0200
+@@ -19,6 +19,6 @@ project(DATA)
+ 
+ option(VL_INSTALL_DATA "Install sample data" OFF)
+ if(VL_INSTALL_DATA)
+-	install(DIRECTORY 3rdparty font glsl images models text volume mol DESTINATION "data/")
+-	install(FILES README.TXT ztest.zip DESTINATION "data/")
++	install(DIRECTORY 3rdparty font glsl images models text volume mol DESTINATION "share/vl/data/")
++	install(FILES README.TXT ztest.zip DESTINATION "share/vl/data/")
+ endif()
