@@ -1,19 +1,17 @@
-
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI="2"
 
-inherit cmake-utils
-inherit eutils
+inherit cmake-utils eutils
 
 DESCRIPTION="A lightweight C++ OpenGL middleware for 2D/3D graphics"
 HOMEPAGE="http://www.visualizationlibrary.org/"
 SRC_URI="http://www.visualizationlibrary.org/downloads/Visualization_Library_SDK-${PV}.tgz"
 
 LICENSE="BSD-2"
-KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~x86"
 SLOT="0"
 IUSE="doc data debug examples glut sdl qt4 wxwidgets"
 
@@ -21,7 +19,7 @@ DEPEND="doc? ( app-doc/doxygen )
         glut? ( media-libs/freeglut )
         sdl? ( media-libs/libsdl[opengl] )
         qt4? ( x11-libs/qt-opengl )
-	wxwidgets? ( x11-libs/wxGTK[opengl] )"
+	      wxwidgets? ( x11-libs/wxGTK[opengl] )"
 RDEPEND=""
 
 src_unpack() {
@@ -29,7 +27,7 @@ src_unpack() {
 	mv Visualization_Library_SDK ${P}
 
 	cd ${S}
-	epatch "${FILESDIR}"/${PN}-cmake.patch
+	epatch "${FILESDIR}"/${P}-cmake.patch
 }
 
 src_configure() {
