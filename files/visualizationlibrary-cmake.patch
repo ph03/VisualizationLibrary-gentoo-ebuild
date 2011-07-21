@@ -1,6 +1,29 @@
+diff -rupN orig/cmake/FindVL.cmake new/cmake/FindVL.cmake
+--- orig/cmake/FindVL.cmake	2011-04-07 00:24:46.000000000 +0200
++++ new/cmake/FindVL.cmake	2011-07-21 09:40:55.552975007 +0200
+@@ -28,8 +28,8 @@ macro(_vl_find_library _var)
+ endmacro()
+ 
+ macro(_vl_find_component _name)
+-	_vl_find_library(VL_${_name}_LIBRARY "${_component_name}")
+-	_vl_find_library(VL_${_name}_LIBRARY_DEBUG "${_component_name}-d")
++	_vl_find_library(VL_${_name}_LIBRARY ${_name})
++	_vl_find_library(VL_${_name}_LIBRARY_DEBUG ${_name}-d)
+ 
+ 	if(VL_${_name}_LIBRARY AND VL_${_name}_LIBRARY_DEBUG)
+ 		set(VL_${_name}_LIBRARIES optimized ${VL_${_name}_LIBRARY} debug ${VL_${_name}_LIBRARY_DEBUG})
+@@ -57,7 +57,7 @@ find_path(VL_INCLUDE_DIRS "vlCore/Visual
+ # Find the requested VL components
+ foreach(component_name ${VL_FIND_COMPONENTS})
+ 	_vl_find_component(${component_name})
+-	list(APPEND _vl_required_vars VL_${name}_LIBRARIES)
++	list(APPEND _vl_required_vars VL_${component_name}_LIBRARIES)
+ endforeach(component_name)
+ 
+ include( FindPackageHandleStandardArgs )
 diff -rupN orig/CMakeLists.txt new/CMakeLists.txt
 --- orig/CMakeLists.txt	2011-07-15 00:50:40.000000000 +0200
-+++ new/CMakeLists.txt	2011-07-20 21:52:45.459954084 +0200
++++ new/CMakeLists.txt	2011-07-21 09:40:07.096975004 +0200
 @@ -150,5 +150,4 @@ add_subdirectory("src")
  # Install Rules
  ################################################################################
@@ -10,7 +33,7 @@ diff -rupN orig/CMakeLists.txt new/CMakeLists.txt
 +install(FILES "cmake/FindVL.cmake" DESTINATION "share/cmake/Modules")
 diff -rupN orig/data/CMakeLists.txt new/data/CMakeLists.txt
 --- orig/data/CMakeLists.txt	2011-07-14 23:00:12.000000000 +0200
-+++ new/data/CMakeLists.txt	2011-07-20 22:50:24.315712435 +0200
++++ new/data/CMakeLists.txt	2011-07-21 09:40:07.097975007 +0200
 @@ -19,6 +19,6 @@ project(DATA)
  
  option(VL_INSTALL_DATA "Install sample data" OFF)
@@ -20,3 +43,22 @@ diff -rupN orig/data/CMakeLists.txt new/data/CMakeLists.txt
 +	install(DIRECTORY 3rdparty font glsl images models text volume mol DESTINATION "share/vl/data/")
 +	install(FILES README.TXT ztest.zip DESTINATION "share/vl/data/")
  endif()
+diff -rupN orig/src/vlGraphics/CMakeLists.txt new/src/vlGraphics/CMakeLists.txt
+--- orig/src/vlGraphics/CMakeLists.txt	2011-07-18 13:25:36.000000000 +0200
++++ new/src/vlGraphics/CMakeLists.txt	2011-07-21 09:40:55.552975007 +0200
+@@ -23,6 +23,7 @@ add_subdirectory("plugins")
+ # Gather VLGraphics source files
+ file(GLOB VLGRAPHICS_SRC "*.cpp")
+ file(GLOB VLGRAPHICS_INC "*.hpp")
++file(GLOB VLGRAPHICS_GL_INC "GL/*.hpp")
+ 
+ if( NOT VL_OPENGL )
+ 	list(REMOVE_ITEM VLGRAPHICS_SRC "${VLGRAPHICS_SOURCE_DIR}/Tessellator.cpp")
+@@ -71,6 +72,7 @@ VL_INSTALL_TARGET(VLGraphics)
+ 
+ # VLGraphics headers
+ install(FILES ${VLGRAPHICS_INC} DESTINATION "include/vlGraphics")
++install(FILES ${VLGRAPHICS_GL_INC} DESTINATION "include/vlGraphics/GL")
+ 
+ # Khronos headers
+ install(DIRECTORY "${KHRONOS_DIR}/GL" DESTINATION "include")
