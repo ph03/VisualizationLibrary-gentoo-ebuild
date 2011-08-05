@@ -28,53 +28,60 @@ src_unpack() {
 }
 
 src_configure() {
-	# benchmarks (BTL) brings up damn load of external deps including fortran
-	# compiler
-	CMAKE_BUILD_TYPE="Release"
-	if use debug; then
-		CMAKE_BUILD_TYPE="Debug"
+  CMAKE_BUILD_TYPE="Release"
+  if use debug; then
+    CMAKE_BUILD_TYPE="Debug"
+  fi
+
+  mycmakeargs="-DVL_UNIX_INSTALL_MODE=ON -DVL_IO_2D_PNG=ON -DVL_IO_2D_TIFF=ON -DVL_IO_2D_JPEG=ON"
+
+  if use doc; then
+    mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DOCS=ON "
+  fi
+
+  if use data; then
+    mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DATA=ON"
+  fi
+
+  if use glut; then
+    mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_SUPPORT=ON"
+    if use examples; then
+      mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_EXAMPLES=ON"
+	  fi
 	fi
 
-	mycmakeargs="-DVL_UNIX_INSTALL_MODE=ON -DVL_IO_2D_PNG=ON -DVL_IO_2D_TIFF=ON -DVL_IO_2D_JPEG=ON"
-
-	if use doc; then
-		mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DOCS=ON "
-	fi
-	if use data; then
-		mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DATA=ON"
-	fi
-	if use glut; then
-		mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_SUPPORT=ON"
-		if use examples; then
-			mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_EXAMPLES=ON"
-		fi
-	fi
 	if use sdl; then
 		mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_SUPPORT=ON"
 		if use examples; then
 			mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_EXAMPLES=ON"
 		fi
 	fi
+
 	if use qt4; then
 		mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_SUPPORT=ON"
 		if use examples; then
 			mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_EXAMPLES=ON"
 		fi
-	fi
-	if use wxwidgets; then
-		mycmakeargs=" ${mycmakeargs} -DVL_GUI_WXWIDGETS_SUPPORT=ON"
-		if use examples; then
-			mycmakeargs=" ${mycmakeargs} -DVL_GUI_WXWIDGETS_EXAMPLES=ON"
-		fi
-	fi
+  fi
+  
+  if use wxwidgets; then
+    mycmakeargs=" ${mycmakeargs} -DVL_GUI_WXWIDGETS_SUPPORT=ON"
+    if use examples; then
+      mycmakeargs=" ${mycmakeargs} -DVL_GUI_WXWIDGETS_EXAMPLES=ON"
+    fi
+  fi
 
-	cmake-utils_src_configure
+  cmake-utils_src_configure
 }
 
 src_compile() {
-	cmake-utils_src_compile
+  cmake-utils_src_compile
+
+  if use doc; then
+    cmake-utils_src_make doxygen
+  fi
 }
 
 src_install() {
-	cmake-utils_src_install
+  cmake-utils_src_install
 }
