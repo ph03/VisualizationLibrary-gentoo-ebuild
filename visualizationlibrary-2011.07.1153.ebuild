@@ -13,10 +13,9 @@ SRC_URI="http://www.visualizationlibrary.org/downloads/Visualization_Library_SDK
 LICENSE="BSD-2"
 KEYWORDS="~amd64 ~x86"
 SLOT="0"
-IUSE="doc data debug examples glut sdl qt4 wxwidgets"
+IUSE="data debug examples glut sdl qt4 wxwidgets"
 
-DEPEND="doc? ( app-doc/doxygen )
-        glut? ( media-libs/freeglut )
+DEPEND="glut? ( media-libs/freeglut )
         sdl? ( media-libs/libsdl[opengl] )
         qt4? ( x11-libs/qt-opengl )
 	      wxwidgets? ( x11-libs/wxGTK[opengl] )"
@@ -39,10 +38,7 @@ src_configure() {
 	fi
 
 	mycmakeargs="-DVL_IO_2D_PNG=ON -DVL_IO_2D_TIFF=ON -DVL_IO_2D_JPEG=ON"
-
-	if use doc; then
-		mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DOCS=ON "
-	fi
+  
 	if use data; then
 		mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DATA=ON"
 	fi
