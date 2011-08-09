@@ -20,7 +20,7 @@ DEPEND="doc? ( app-doc/doxygen )
         glut? ( media-libs/freeglut )
         sdl? ( media-libs/libsdl[opengl] )
         qt4? ( x11-libs/qt-opengl )
-	      wxwidgets? ( x11-libs/wxGTK[opengl] )"
+        wxwidgets? ( x11-libs/wxGTK[opengl] )"
 RDEPEND=""
 
 src_unpack() {
@@ -47,21 +47,21 @@ src_configure() {
     mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_SUPPORT=ON"
     if use examples; then
       mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_EXAMPLES=ON"
-	  fi
-	fi
+    fi
+  fi
 
-	if use sdl; then
-		mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_SUPPORT=ON"
-		if use examples; then
-			mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_EXAMPLES=ON"
-		fi
-	fi
+  if use sdl; then
+    mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_SUPPORT=ON"
+    if use examples; then
+      mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_EXAMPLES=ON"
+    fi
+  fi
 
-	if use qt4; then
-		mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_SUPPORT=ON"
-		if use examples; then
-			mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_EXAMPLES=ON"
-		fi
+  if use qt4; then
+    mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_SUPPORT=ON"
+    if use examples; then
+      mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_EXAMPLES=ON"
+    fi
   fi
   
   if use wxwidgets; then

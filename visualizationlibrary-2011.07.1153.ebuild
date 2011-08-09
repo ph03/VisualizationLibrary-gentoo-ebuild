@@ -18,62 +18,62 @@ IUSE="data debug examples glut sdl qt4 wxwidgets"
 DEPEND="glut? ( media-libs/freeglut )
         sdl? ( media-libs/libsdl[opengl] )
         qt4? ( x11-libs/qt-opengl )
-	      wxwidgets? ( x11-libs/wxGTK[opengl] )"
+        wxwidgets? ( x11-libs/wxGTK[opengl] )"
 RDEPEND=""
 
 src_unpack() {
-	unpack ${A}
-	mv Visualization_Library_SDK ${P}
+  unpack ${A}
+  mv Visualization_Library_SDK ${P}
 
-	cd ${S}
-	epatch "${FILESDIR}"/${P}-cmake.patch
+  cd ${S}
+  epatch "${FILESDIR}"/${P}-cmake.patch
 }
 
 src_configure() {
-	# benchmarks (BTL) brings up damn load of external deps including fortran
-	# compiler
-	CMAKE_BUILD_TYPE="Release"
-	if use debug; then
-		CMAKE_BUILD_TYPE="Debug"
-	fi
+  # benchmarks (BTL) brings up damn load of external deps including fortran
+  # compiler
+  CMAKE_BUILD_TYPE="Release"
+  if use debug; then
+    CMAKE_BUILD_TYPE="Debug"
+  fi
 
-	mycmakeargs="-DVL_IO_2D_PNG=ON -DVL_IO_2D_TIFF=ON -DVL_IO_2D_JPEG=ON"
+  mycmakeargs="-DVL_IO_2D_PNG=ON -DVL_IO_2D_TIFF=ON -DVL_IO_2D_JPEG=ON"
   
-	if use data; then
-		mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DATA=ON"
-	fi
-	if use glut; then
-		mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_SUPPORT=ON"
-		if use examples; then
-			mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_EXAMPLES=ON"
-		fi
-	fi
-	if use sdl; then
-		mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_SUPPORT=ON"
-		if use examples; then
-			mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_EXAMPLES=ON"
-		fi
-	fi
-	if use qt4; then
-		mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_SUPPORT=ON"
-		if use examples; then
-			mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_EXAMPLES=ON"
-		fi
-	fi
-	if use wxwidgets; then
-		mycmakeargs=" ${mycmakeargs} -DVL_GUI_WXWIDGETS_SUPPORT=ON"
-		if use examples; then
-			mycmakeargs=" ${mycmakeargs} -DVL_GUI_WXWIDGETS_EXAMPLES=ON"
-		fi
-	fi
+  if use data; then
+    mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DATA=ON"
+  fi
+  if use glut; then
+    mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_SUPPORT=ON"
+    if use examples; then
+      mycmakeargs=" ${mycmakeargs} -DVL_GUI_GLUT_EXAMPLES=ON"
+    fi
+  fi
+  if use sdl; then
+    mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_SUPPORT=ON"
+    if use examples; then
+      mycmakeargs=" ${mycmakeargs} -DVL_GUI_SDL_EXAMPLES=ON"
+    fi
+  fi
+  if use qt4; then
+    mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_SUPPORT=ON"
+    if use examples; then
+      mycmakeargs=" ${mycmakeargs} -DVL_GUI_QT4_EXAMPLES=ON"
+    fi
+  fi
+  if use wxwidgets; then
+    mycmakeargs=" ${mycmakeargs} -DVL_GUI_WXWIDGETS_SUPPORT=ON"
+    if use examples; then
+      mycmakeargs=" ${mycmakeargs} -DVL_GUI_WXWIDGETS_EXAMPLES=ON"
+    fi
+  fi
 
-	cmake-utils_src_configure
+  cmake-utils_src_configure
 }
 
 src_compile() {
-	cmake-utils_src_compile
+  cmake-utils_src_compile
 }
 
 src_install() {
-	cmake-utils_src_install
+  cmake-utils_src_install
 }
