@@ -12,7 +12,6 @@ ESVN_REPO_URI="http://visualizationlibrary.googlecode.com/svn/trunk"
 ESVN_PROJECT="visualizationlibrary-svn"
 
 LICENSE="BSD-2"
-KEYWORDS="~amd64 ~x86"
 SLOT="0"
 IUSE="doc data debug examples glut sdl qt4 wxwidgets"
 
@@ -22,10 +21,6 @@ DEPEND="doc? ( app-doc/doxygen )
         qt4? ( x11-libs/qt-opengl )
         wxwidgets? ( x11-libs/wxGTK[opengl] )"
 RDEPEND=""
-
-src_unpack() {
-  subversion_fetch
-}
 
 src_configure() {
   CMAKE_BUILD_TYPE="Release"

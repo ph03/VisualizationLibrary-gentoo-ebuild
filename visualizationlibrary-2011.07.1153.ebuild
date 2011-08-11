@@ -30,8 +30,6 @@ src_unpack() {
 }
 
 src_configure() {
-  # benchmarks (BTL) brings up damn load of external deps including fortran
-  # compiler
   CMAKE_BUILD_TYPE="Release"
   if use debug; then
     CMAKE_BUILD_TYPE="Debug"
