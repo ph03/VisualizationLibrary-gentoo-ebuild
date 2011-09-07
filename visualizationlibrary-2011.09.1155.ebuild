@@ -33,7 +33,7 @@ src_configure() {
 		CMAKE_BUILD_TYPE="Debug"
 	fi
 
-	mycmakeargs="-DVL_IO_2D_PNG=ON -DVL_IO_2D_TIFF=ON -DVL_IO_2D_JPEG=ON"
+	mycmakeargs="-DVL_UNIX_INSTALL_MODE=ON -DVL_IO_2D_PNG=ON -DVL_IO_2D_TIFF=ON -DVL_IO_2D_JPEG=ON"
 
 	if use doc; then
 		mycmakeargs=" ${mycmakeargs} -DVL_INSTALL_DOCS=ON "
