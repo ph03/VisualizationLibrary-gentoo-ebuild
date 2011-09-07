@@ -1,0 +1,18 @@
+# ChangeLog for media-gfx/visualizationlibrary
+# Copyright 1999-2011 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*media-gfx/visualizationlibrary-9999 (09 Aug 2011)
+
+  09 Aug 2011; Janick Martinez Esturo <martinez@isg.cs.uni-magdeburg.de>
+  +visualizationlibrary-9999.ebuild :
+  Initial import.  Ebuild submitted by Janick Martinez Esturo
+  <martinez@isg.cs.uni-magdeburg.de>.
+
+*media-gfx/visualizationlibrary-2011.07.1153 (09 Aug 2011)
+
+  09 Aug 2011; Janick Martinez Esturo <martinez@isg.cs.uni-magdeburg.de>
+  +visualizationlibrary-2011.07.1153.ebuild,
+  +files/visualizationlibrary-2011.07.1153-cmake.patch :
+  Initial import.  Ebuild submitted by Janick Martinez Esturo
+  <martinez@isg.cs.uni-magdeburg.de>.
