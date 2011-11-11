@@ -4,12 +4,12 @@
 
 EAPI="2"
 
-inherit cmake-utils eutils subversion
+inherit cmake-utils eutils git-2
 
 DESCRIPTION="A lightweight C++ OpenGL middleware for 2D/3D graphics"
 HOMEPAGE="http://www.visualizationlibrary.org/"
-ESVN_REPO_URI="http://visualizationlibrary.googlecode.com/svn/trunk"
-ESVN_PROJECT="visualizationlibrary-svn"
+EGIT_REPO_URI="http://martinez@visual.cs.uni-magdeburg.de/git/visualizationlibrary.git"
+EGIT_BRANCH="vc"
 
 LICENSE="BSD-2"
 SLOT="0"
